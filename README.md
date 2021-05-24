@@ -1,24 +1,83 @@
-# README
+# テーブル設計
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## users テーブル
 
-Things you may want to cover:
+| Column           | Type   | Options     |
+| ---------------- | ------ | ----------- |
+| nickname         | string | null: false |
+| email            | string | null: false |
+| password         | string | null: false |
+| last_name_kanji  | string | null: false | 
+| first_name_kanji | string | null: false |
+| last_name_kana   | string | null: false |
+| first_name_kana  | string | null: false |
+| birthday_year    | string | null: false |
+| birthday_month   | string | null: false |
+| birthday_day     | string | null: false |
 
-* Ruby version
+### Association
 
-* System dependencies
+- has_many :products
+- has_many :comments
+- has_many :addreses
+- has_many :credits
 
-* Configuration
+## products テーブル　
 
-* Database creation
+| Column           | Type       | Options |
+| ---------------- | ---------- | ------------------------------ |
+| product_name     | text       | null: false                    |
+| description      | text       | null: false                    |
+| category         | string     | null: false                    | 
+| status           | string     | null: false                    | 
+| shipping         | string     | null: false                    | 
+| shipping_source  | string     | null: false                    | 
+| shipping_address | string     | null: false                    | 
+| send_day         | string     | null: false                    | 
+| price            | integer    | null: false                    | 
+| user             | references | null: false, foreign_key: true |
+| credit           | references |                                |
+| address          | references |                                |
 
-* Database initialization
+### Association
 
-* How to run the test suite
+- has_many :comments
+- belongs_to :user
 
-* Services (job queues, cache servers, search engines, etc.)
+## comments テーブル
 
-* Deployment instructions
+ Column     | Type       | Options                        |
+| --------- | ---------- | ------------------------------ |
+| text      | text       | null: false                    |
+| user      | references | null: false, foreign_key: true |
+| product   | references | null: false, foreign_key: true | 
 
-* ...
+### Association
+
+- belongs_to :user
+- belongs_to :product
+
+# credits テーブル
+
+| Column              | Type       | Options                        |
+| ------------------- | ---------- | ------------------------------ |
+| card_number         | integer    | null: false                    |
+| expiration-month    | integer    | null: false                    |
+| expiration-year     | integer    | null: false                    | 
+| security_code       | integer    | null: false                    | 
+
+### Association
+  - belongs_to :user
+
+  # address テーブル
+| Column              | Type       | Options                        |
+| postal_code         | integer    | null: false                    | 
+| prefecture          | string     | null: false                    | 
+| city                | string     | null: false                    | 
+| flat_number         | string     | null: false                    | 
+| apartment           | string     |                                |
+| phone_number        | integer    | null: false                    |
+| user                | references | null: false, foreign_key: true |
+
+### Association
+- belongs_to :user
