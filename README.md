@@ -70,9 +70,9 @@
  # purchase_users テーブル
 
 | Column        | Type       | Options                        |
-| purchase_user | references | null: false, foreign_key: true | 
+| user          | references | null: false, foreign_key: true | 
 | product       | references | null: false, foreign_key: true | 
 
 - belongs_to :product
 - belongs_to :user
-- has_one :addreses
+- has_one :address
