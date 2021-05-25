@@ -2,16 +2,16 @@
 
 ## users テーブル
 
-| Column             | Type   | Options     |
-| ------------------ | ------ | ----------- |
-| nickname           | string | null: false |
-| email              | string | null: false |
-| encrypted_password | string | null: false |
-| last_name_kanji    | string | null: false | 
-| first_name_kanji   | string | null: false |
-| last_name_kana     | string | null: false |
-| first_name_kana    | string | null: false |
-| birthday           | date   | null: false |
+| Column             | Type   | Options                       |
+| ------------------ | ------ | ----------------------------- |
+| nickname           | string | null: false                   |
+| email              | string | null: false, uniqueness: true |
+| encrypted_password | string | null: false                   |
+| last_name_kanji    | string | null: false                   | 
+| first_name_kanji   | string | null: false                   |
+| last_name_kana     | string | null: false                   |
+| first_name_kana    | string | null: false                   |
+| birthday           | date   | null: false                   |
 
 ### Association
 
@@ -36,8 +36,8 @@
 ### Association
 
 - has_many :comments
-- has_many :purchase_users
-- belongs_to :users
+- has_one :purchase_user
+- belongs_to :user
 
 ## comments テーブル
 
@@ -49,8 +49,8 @@
 
 ### Association
 
-- belongs_to :users
-- belongs_to :products
+- belongs_to :user
+- belongs_to :product
 
   # addreses テーブル
 
@@ -61,11 +61,11 @@
 | flat_number         | string     | null: false                    | 
 | apartment           | string     |                                |
 | phone_number        | string     | null: false                    |
-| user                | references | null: false, foreign_key: true |
+| purchase_user       | references | null: false, foreign_key: true |
 
 ### Association
 
-- belongs_to :purchase_users
+- belongs_to :purchase_user
 
  # purchase_users テーブル
 
@@ -73,6 +73,6 @@
 | purchase_user | references | null: false, foreign_key: true | 
 | product       | references | null: false, foreign_key: true | 
 
-- belongs_to :products
-- belongs_to :users
-- has_many :addreses
+- belongs_to :product
+- belongs_to :user
+- has_one :addreses
