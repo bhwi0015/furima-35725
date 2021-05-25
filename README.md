@@ -22,7 +22,7 @@
 - has_many :addreses
 - has_many :credits
 
-## products テーブル　
+## products テーブル
 
 | Column           | Type       | Options |
 | ---------------- | ---------- | ------------------------------ |
