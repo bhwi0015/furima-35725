@@ -17,8 +17,7 @@
 
 - has_many :products
 - has_many :comments
-- has_many :addreses
-- has_many :purchase_user
+- has_many :purchase_users
 
 ## products テーブル
 
@@ -29,18 +28,16 @@
 | category_id         | integer    | null: false                    | 
 | status_id           | integer    | null: false                    | 
 | shipping_id         | integer    | null: false                    | 
-| sprefecture_id      | integer    | null: false                    | 
+| prefecture_id       | integer    | null: false                    | 
 | send_day_id         | integer    | null: false                    | 
 | price               | integer    | null: false                    | 
 | user                | references | null: false, foreign_key: true |
-| credit              | references |                                |
-| address             | references |                                |
 
 ### Association
 
 - has_many :comments
-- has_many :purchase_user
-- belongs_to :user
+- has_many :purchase_users
+- belongs_to :users
 
 ## comments テーブル
 
@@ -52,14 +49,14 @@
 
 ### Association
 
-- belongs_to :user
-- belongs_to :product
+- belongs_to :users
+- belongs_to :products
 
-  # address テーブル
+  # addreses テーブル
 
 | Column              | Type       | Options                        |
 | postal_code         | string     | null: false                    | 
-| prefecture          | integer    | null: false                    | 
+| prefecture_id       | integer    | null: false                    | 
 | city                | string     | null: false                    | 
 | flat_number         | string     | null: false                    | 
 | apartment           | string     |                                |
@@ -67,13 +64,15 @@
 | user                | references | null: false, foreign_key: true |
 
 ### Association
-- belongs_to :user
 
- # purchase_user テーブル
+- belongs_to :purchase_users
 
-| Column  | Type       | Options                        |
-| user    | references | null: false, foreign_key: true | 
-| product | references | null: false, foreign_key: true | 
+ # purchase_users テーブル
 
-- belongs_to :product
-- belongs_to :user
+| Column        | Type       | Options                        |
+| purchase_user | references | null: false, foreign_key: true | 
+| product       | references | null: false, foreign_key: true | 
+
+- belongs_to :products
+- belongs_to :users
+- has_many :addreses
