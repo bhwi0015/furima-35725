@@ -146,6 +146,20 @@ RSpec.describe User, type: :model do
       expect(@user.errors.full_messages).to include("First name kana に全角カタカナを使用してください")
     end
 
+
+    it 'ユーザーの名字フリガナは半角文字だと登録できないこと' do
+      @user.last_name_kana = 'aa'
+      @user.valid?
+      expect(@user.errors.full_messages).to include("Last name kana に全角カタカナを使用してください")
+    end
+
+
+    it 'ユーザーの名前フリガナは半角文字だと登録できないこと' do
+      @user.first_name_kana = 'aa'
+      @user.valid?
+      expect(@user.errors.full_messages).to include("First name kana に全角カタカナを使用してください")
+    end
+
     it '生年月日が必須であること' do
       @user.birthday = ''
       @user.valid?
