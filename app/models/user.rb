@@ -20,9 +20,8 @@ class User < ApplicationRecord
      validates :first_name_kana
     end
 
-    def password_complexity
-     return if password.blank? || password =~ /^(?=.*?[a-z])(?=.*?\d)[a-z\d]{6,100}$/i
-     errors.add :password, "パスワードの強度が不足しています。半角英数字混合で入力する必要があります。"
+  PASSWORD_REGEX = /\A(?=.*?[a-z])(?=.*?[\d])[a-z\d]+\z/i.freeze
+     validates_format_of :password, with: PASSWORD_REGEX, message: 'には英字と数字の両方を含めて設定してください' 
+
     
-  end
 end
