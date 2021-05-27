@@ -59,6 +59,13 @@ RSpec.describe User, type: :model do
       expect(@user.errors.full_messages).to include("Password can't be blank")
     end
 
+    it '全角文字では登録できないこと' do
+      @user.password = 'ああああああ'
+      @user.password_confirmation = 'ああああああ'
+      @user.valid?
+      expect(@user.errors.full_messages).to include("Password には英字と数字の両方を含めて設定してください")
+    end
+
     it 'パスワードは、6文字以上での入力が必須であること' do
       @user.password = 'a1'
       @user.valid?
@@ -144,27 +151,6 @@ RSpec.describe User, type: :model do
       @user.valid?
       expect(@user.errors.full_messages).to include("Birthday can't be blank")
     end
-
-    it 'ログアウト状態では、ヘッダーに新規登録/ログインボタンが表示されること' do
-      @user.password = ''
-      @user.valid?
-      expect(@user.errors.full_messages).to include()
-    end
-    it 'ログイン状態では、ヘッダーにユーザーのニックネーム/ログアウトボタンが表示されること' do
-      @user.password = ''
-      @user.valid?
-      expect(@user.errors.full_messages).to include()
-    end
-    it 'ヘッダーの新規登録/ログインボタンをクリックすることで、各ページに遷移できること' do
-      @user.password = ''
-      @user.valid?
-      expect(@user.errors.full_messages).to include()
-    end
-    it 'ヘッダーのログアウトボタンをクリックすることで、ログアウトができること' do
-      @user.password = ''
-      @user.valid?
-      expect(@user.errors.full_messages).to include()
-    end
-  end
-end
+   end
+ end
 end
