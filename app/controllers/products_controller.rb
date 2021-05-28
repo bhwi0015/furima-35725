@@ -1,4 +1,5 @@
 class ProductsController < ApplicationController
+  before_action :authenticate_user!, only: [:new]
   def index
     @products = Product.all
   end
@@ -9,6 +10,9 @@ class ProductsController < ApplicationController
 
   def create
     @product = Product.create(product_params)
+    if @product.price >= 300 && @product.price <= 9999999
+      redirect_to new_product_path
+    end
   end
 
   private
