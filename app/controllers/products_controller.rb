@@ -1,17 +1,21 @@
 class ProductsController < ApplicationController
-  before_action :authenticate_user!, only: [:new]
   def index
-    @products = Product.all
+    @products = Product.all.order("created_at DESC")
   end
 
   def new
     @product = Product.new
+    unless user_signed_in?
+      redirect_to user_session_path
+    end
   end
 
   def create
-    @product = Product.create(product_params)
-    if @product.price >= 300 && @product.price <= 9999999
-      redirect_to new_product_path
+    @product = Product.new(product_params)
+    if @product.save
+      redirect_to root_path
+    else
+      render :new
     end
   end
 
