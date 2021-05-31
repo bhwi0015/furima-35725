@@ -71,6 +71,12 @@ RSpec.describe Product, type: :model do
     expect(@product.errors.full_messages).to include("Price can't be blank")
    end
 
+   it "商品価格が半角英数字混合では出品できない " do
+    @product.price = "a1a1"
+    @product.valid?
+    expect(@product.errors.full_messages).to include("Price is not a number")
+   end
+
    it "販売価格は、¥300~¥9,999,999の間のみ保存可能であること" do
     @product.price = 299
     @product.valid?

@@ -1,6 +1,6 @@
 class ProductsController < ApplicationController
 
-  before_action :authenticate_user!, except: [:index, :create]
+  before_action :authenticate_user!, except: [:new, :create]
 
   def index
     @products = Product.all#.order("created_at DESC")
