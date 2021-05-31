@@ -6,13 +6,13 @@ window.addEventListener('load', () => {
   const inputValue = priceInput.value;
 
   const addTaxDom = document.getElementById("add-tax-price");
-    addTaxDom.innerHTML = inputValue * 0.1;
-    console.log(addTaxDom);
+    addTaxDom.innerHTML = (Math.floor(inputValue * 0.1));
+   
     
 
   const salesProfit = document.getElementById("profit")
   const valueResult = inputValue * 0.1
-    salesProfit.innerHTML =  (Math.floor(inputValue - valueResult));
-    console.log(salesProfit);
+    salesProfit.innerHTML = (Math.floor(inputValue - valueResult));
+   
 })
 });

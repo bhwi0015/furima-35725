@@ -1,13 +1,13 @@
 class ProductsController < ApplicationController
+
+  before_action :authenticate_user!, except: [:index, :create]
+
   def index
-    @products = Product.all.order("created_at DESC")
+    @products = Product.all#.order("created_at DESC")
   end
 
   def new
     @product = Product.new
-    unless user_signed_in?
-      redirect_to user_session_path
-    end
   end
 
   def create

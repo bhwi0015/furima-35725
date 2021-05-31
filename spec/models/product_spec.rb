@@ -36,31 +36,31 @@ RSpec.describe Product, type: :model do
    end
 
    it "カテゴリーの情報が必須であること" do
-    @product.category_id = "1"
+    @product.category_id = 1
     @product.valid?
     expect(@product.errors.full_messages).to include("Category must be other than 1")
    end
 
    it "商品の状態についての情報が必須であること" do
-    @product.status_id = "1"
+    @product.status_id = 1
     @product.valid?
     expect(@product.errors.full_messages).to include("Status must be other than 1")
    end
 
    it "配送料の負担についての情報が必須であること" do
-    @product.shipping_id = "1"
+    @product.shipping_id = 1
     @product.valid?
     expect(@product.errors.full_messages).to include("Shipping must be other than 1")
    end
 
    it "発送元の地域についての情報が必須であること" do
-    @product.prefecture_id = "1"
+    @product.prefecture_id = 1
     @product.valid?
     expect(@product.errors.full_messages).to include("Prefecture must be other than 1")
    end
 
    it "発送までの日数についての情報が必須であること" do
-    @product.send_day_id = "1"
+    @product.send_day_id = 1
     @product.valid?
     expect(@product.errors.full_messages).to include("Send day must be other than 1")
    end
@@ -72,13 +72,13 @@ RSpec.describe Product, type: :model do
    end
 
    it "販売価格は、¥300~¥9,999,999の間のみ保存可能であること" do
-    @product.price = "299"
+    @product.price = 299
     @product.valid?
     expect(@product.errors.full_messages).to include("Price must be greater than 299")
    end
 
     it "販売価格は、¥300~¥9,999,999の間のみ保存可能であること" do
-      @product.price = "100000000"
+      @product.price = 100000000
       @product.valid?
       expect(@product.errors.full_messages).to include( "Price must be less than 1000000")
    end
