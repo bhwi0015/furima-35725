@@ -1,5 +1,5 @@
 class ProductsController < ApplicationController
-  before_action :set_prototype, except: [:index, :new, :create]
+  before_action :set_prototype, except: [:index, :new, :create, :show]
   before_action :authenticate_user!, only: [:new, :create,:edit]
   before_action :contributor_confirmation, only: [:edit, :update]
   def index
@@ -20,10 +20,6 @@ class ProductsController < ApplicationController
   end
 
   def show
-    @product = Product.find(params[:id])
-  end
-
-  def edit
   end
 
   def update
