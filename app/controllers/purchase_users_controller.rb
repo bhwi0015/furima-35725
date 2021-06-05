@@ -2,7 +2,7 @@ class PurchaseUsersController < ApplicationController
 
    before_action :set_product 
    before_action :contributor_confirmation, only: :index
-
+   before_action :authenticate_user!, only: :index
   def index
     @purchase_user_address = PurchaseUserAddress.new
   end

@@ -2,7 +2,6 @@ class PurchaseUserAddress
   include ActiveModel::Model
   attr_accessor :token, :postal_code, :prefecture_id, :city, :flat_number, :apartment, :phone_number, :purchase_user_id, :product_id, :user_id
 
-
   with_options presence: true do
     validates :city
     validates :flat_number
