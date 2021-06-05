@@ -1,8 +1,8 @@
 FactoryBot.define do
   factory :product do
 
-    product_name       {"あaaaaa"}
-    description        {"あaaaaaa"}
+    product_name      {"あaaaaa"}
+    description       {"あaaaaaa"}
     category_id       {2}
     status_id         {2}
     shipping_id       {2}
