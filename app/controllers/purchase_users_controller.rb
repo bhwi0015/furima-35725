@@ -1,8 +1,8 @@
 class PurchaseUsersController < ApplicationController
 
    before_action :set_product 
-   before_action :contributor_confirmation, only: :index
-   before_action :authenticate_user!, only: :index
+   before_action :contributor_confirmation, only: [:index, :create]
+   before_action :authenticate_user!, only: [:index, :create]
   def index
     @purchase_user_address = PurchaseUserAddress.new
   end
@@ -38,7 +38,7 @@ class PurchaseUsersController < ApplicationController
   end
 
   def contributor_confirmation
-     if @product.purchase_user.present? 
+     if current_user == @product.user && @product.purchase_user.present? 
        redirect_to root_path
   end
  end
