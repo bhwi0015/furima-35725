@@ -3,10 +3,10 @@ require 'rails_helper'
 RSpec.describe PurchaseUserAddress, type: :model do
   before do
     user = FactoryBot.create(:user)
-    @product = FactoryBot.build(:product)
-    @product.image = fixture_file_upload('app/assets/images/star.png')
-    @product.save
-    @purchase_user_address = FactoryBot.build(:purchase_user_address, user_id: user.id, product_id: @product.id)
+    product = FactoryBot.build(:product)
+    product.image = fixture_file_upload('app/assets/images/star.png')
+    product.save
+    @purchase_user_address = FactoryBot.build(:purchase_user_address, user_id: user.id, product_id: product.id)
     sleep 0.1
   end
 
@@ -16,10 +16,6 @@ RSpec.describe PurchaseUserAddress, type: :model do
 
      it "登録内容に問題がない場合" do
        expect(@purchase_user_address).to be_valid
-     end
-
-     it "建物名があってもテストができる" do
-      expect(@purchase_user_address).to be_valid
      end
 
      it "建物名がなくてもテストができる" do

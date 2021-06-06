@@ -3,6 +3,6 @@ Rails.application.routes.draw do
   root to: "products#index"
 
   resources :products, except: :destory do
-    resources :purchase_users, only:[:create, :index, :new]
+    resources :purchase_users, only:[:create, :index]
   end
 end
