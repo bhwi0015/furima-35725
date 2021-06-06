@@ -40,7 +40,7 @@ class ProductsController < ApplicationController
   end
 
   def contributor_confirmation
-    if current_user == @product.user || @product.purchase_user.blank? 
+    if current_user == @product.user || @product.purchase_user.present? 
        redirect_to root_path
     end
   end
