@@ -5,5 +5,4 @@ Rails.application.routes.draw do
   resources :products, except: :destory do
     resources :purchase_users, only:[:create, :index, :new]
   end
-  resources :addresses, only:[:create, :index, :new]
 end

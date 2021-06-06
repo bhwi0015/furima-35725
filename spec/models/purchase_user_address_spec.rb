@@ -7,7 +7,7 @@ RSpec.describe PurchaseUserAddress, type: :model do
     @product.image = fixture_file_upload('app/assets/images/star.png')
     @product.save
     @purchase_user_address = FactoryBot.build(:purchase_user_address, user_id: user.id, product_id: @product.id)
-    sleep 0.1 
+    sleep 0.1
   end
 
   describe '商品保存' do
@@ -17,6 +17,17 @@ RSpec.describe PurchaseUserAddress, type: :model do
      it "登録内容に問題がない場合" do
        expect(@purchase_user_address).to be_valid
      end
+
+     it "建物名があってもテストができる" do
+      expect(@purchase_user_address).to be_valid
+     end
+
+     it "建物名がなくてもテストができる" do
+      @purchase_user_address.apartment = ""
+      expect(@purchase_user_address).to be_valid
+     end
+
+
     end
 
     context '内容に問題がある場合' do
@@ -36,7 +47,7 @@ RSpec.describe PurchaseUserAddress, type: :model do
        it "都道府県の選択がされてないとき" do
         @purchase_user_address.prefecture_id = 1
         @purchase_user_address.valid?
-        expect(@purchase_user_address.errors.full_messages).to include("Prefecture can't be blank")
+        expect(@purchase_user_address.errors.full_messages).to include("Prefecture Slect prefecture")
        end
 
       it "市区町村が空のとき" do
@@ -61,6 +72,24 @@ RSpec.describe PurchaseUserAddress, type: :model do
         @purchase_user_address.postal_code = "1234567"
         @purchase_user_address.valid?
         expect(@purchase_user_address.errors.full_messages).to include("Postal code is invalid. Include hyphen(-)")
+       end
+
+       it "phone_numberが英数混合では登録できないこと" do
+        @purchase_user_address.phone_number = "1234567aaa"
+        @purchase_user_address.valid?
+        expect(@purchase_user_address.errors.full_messages).to include("Phone number 半角数字のみを使用してください")
+       end
+
+       it "12桁以上では登録できないこと" do
+        @purchase_user_address.phone_number = "1234567890123"
+        @purchase_user_address.valid?
+        expect(@purchase_user_address.errors.full_messages).to include("Phone number 有効な電話番号を使用してください")
+       end
+
+       it "9桁以下では登録できないこと" do
+        @purchase_user_address.phone_number = "1234567"
+        @purchase_user_address.valid?
+        expect(@purchase_user_address.errors.full_messages).to include("Phone number 有効な電話番号を使用してください")
        end
 
       it "紐ずくuserがいないとき" do
