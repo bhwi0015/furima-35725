@@ -8,6 +8,7 @@ class Product < ApplicationRecord
   belongs_to :send_day
 
   belongs_to :user 
+  has_one :purchase_user
   has_one_attached :image
 
   with_options presence: true do

@@ -52,10 +52,10 @@
 - belongs_to :user
 - belongs_to :product
 
-  # addreses テーブル
+  # addresses テーブル
 
 | Column              | Type       | Options                        |
-| postal_code         | string     | null: false                    | 
+| postal_code         | string     | null:false                     | 
 | prefecture_id       | integer    | null: false                    | 
 | city                | string     | null: false                    | 
 | flat_number         | string     | null: false                    | 
