@@ -2,7 +2,7 @@ Rails.application.routes.draw do
   devise_for :users
   root to: "products#index"
 
-  resources :products, except: :destory do
+  resources :products do
     resources :purchase_users, only:[:create, :index]
   end
 end
