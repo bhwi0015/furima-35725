@@ -1,7 +1,7 @@
 class ProductsController < ApplicationController
-  before_action :set_prototype, only: [:show, :edit, :update]
-  before_action :authenticate_user!, only: [:new, :create,:edit, :update]
-  before_action :contributor_confirmation, only: [:edit, :update]
+  before_action :set_prototype, except: [:index, :create, :new]
+  before_action :authenticate_user!, only: [:index, :show]
+  before_action :contributor_confirmation, only: [:edit, :update, :destroy]
   def index
     @products = Product.all.order("created_at DESC")
   end
@@ -30,6 +30,14 @@ class ProductsController < ApplicationController
     end
   end 
 
+  def destroy
+    if @product.destroy
+      redirect_to root_path
+    else
+      redirect_to root_path
+    end
+  end
+
   private
   def product_params
     params.require(:product).permit(:product_name, :description, :category_id, :status_id, :shipping_id, :prefecture_id, :send_day_id, :price, :image).merge(user_id: current_user.id)
@@ -40,8 +48,6 @@ class ProductsController < ApplicationController
   end
 
   def contributor_confirmation
-    if current_user == @product.user || @product.purchase_user.present? 
-       redirect_to root_path
-    end
+    redirect_to root_path unless current_user == @product.user || @product.purchase_user.blank? 
   end
 end
