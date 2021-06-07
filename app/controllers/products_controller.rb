@@ -1,6 +1,6 @@
 class ProductsController < ApplicationController
   before_action :set_prototype, except: [:index, :create, :new]
-  before_action :authenticate_user!, only: [:index, :show]
+  before_action :authenticate_user!, except: [:index, :show]
   before_action :contributor_confirmation, only: [:edit, :update, :destroy]
   def index
     @products = Product.all.order("created_at DESC")
