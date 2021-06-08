@@ -25,6 +25,6 @@ class Product < ApplicationRecord
   end
 
   validates :price, format: { with: /\A[0-9]+\z/i, message: 'に半角数字を使用してください' },
-  numericality: {greater_than: 299,less_than: 1000000}
+  numericality: {greater_than: 299,less_than: 10000000}
  end
 end  
