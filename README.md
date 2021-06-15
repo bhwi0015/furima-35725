@@ -21,7 +21,7 @@
 
 ## products テーブル
 
-| Column              | Type       | Options |
+| Column              | Type       | Options                        |
 | ------------------- | ---------- | ------------------------------ |
 | product_name        | string     | null: false                    |
 | description         | text       | null: false                    |
@@ -41,7 +41,7 @@
 
 ## comments テーブル
 
- Column     | Type       | Options                        |
+| Column    | Type       | Options                        |
 | --------- | ---------- | ------------------------------ |
 | text      | text       | null: false                    |
 | user      | references | null: false, foreign_key: true |
@@ -55,6 +55,7 @@
   # addresses テーブル
 
 | Column              | Type       | Options                        |
+| ------------------- | ---------- | -------------------------------|
 | postal_code         | string     | null:false                     | 
 | prefecture_id       | integer    | null: false                    | 
 | city                | string     | null: false                    | 
@@ -70,6 +71,7 @@
  # purchase_users テーブル
 
 | Column        | Type       | Options                        |
+| ------------- |            | ------------------------------ |
 | user          | references | null: false, foreign_key: true | 
 | product       | references | null: false, foreign_key: true | 
 
