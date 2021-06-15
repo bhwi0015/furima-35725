@@ -71,7 +71,7 @@
  # purchase_users テーブル
 
 | Column        | Type       | Options                        |
-| ------------- |            | ------------------------------ |
+| ------------- | ---------- | ------------------------------ |
 | user          | references | null: false, foreign_key: true | 
 | product       | references | null: false, foreign_key: true | 
 
